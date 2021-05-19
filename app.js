@@ -184,13 +184,14 @@ app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
 app.get('/', (req, res) => {
-    res.render('home');P
+    res.render('home');
 })
 
 // res for every method
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));
 })
+
 // default error handling middleware/
 app.use((err, req, res, next) => {
     const {statusCode = 500} = err;
