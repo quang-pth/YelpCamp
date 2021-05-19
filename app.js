@@ -200,6 +200,9 @@ app.use((err, req, res, next) => {
     // res.send('oh boy, sth went wrong!');    
 })
 
-app.listen(3000, () => {
-    console.log("SERVING ON PORT 3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`SERVING ON PORT ${port}`);
 })
+
+
