@@ -4,6 +4,7 @@ const Campground = require("../models/campground");
 // import cities, places and descriptors
 const cities = require('./cities');
 const {places, descriptors} = require('./seedsHelper');
+const imagesSrc = require("./imagesPath");
 
 // connect to database and declare some option
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
@@ -17,7 +18,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
     console.log("Database connected");
-});
+}); 
 
 // take a random element in array
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
@@ -25,9 +26,13 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 const seedDB = async() => {
     await Campground.deleteMany({});
     // take 50 city random from cities dataset
-    for (let i = 0; i < 301; i++) {
+    for (let i = 0; i < 358; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
+
+        // console.log(imagesSrc[i].path);
+        // console.log(imagesSrc[i].filename);
+
         const camp = new Campground({
             author: '60975144c200631a585ad4de',
             // get name and state of city
@@ -43,8 +48,12 @@ const seedDB = async() => {
             },
             images: [
                 {
-                    url: 'https://res.cloudinary.com/dqxhqjbne/image/upload/v1620963838/YelpCamp/pnvdjpnwu9yztqoe3wfe.jpg',
-                    fileName: 'YelpCamp/pnvdjpnwu9yztqoe3wfe'              
+                    url: sample(imagesSrc).path,
+                    fileName: sample(imagesSrc).filename
+                },
+                {
+                    url: sample(imagesSrc).path,
+                    fileName: sample(imagesSrc).filename
                 }
             ],
                 

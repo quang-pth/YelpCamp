@@ -70,7 +70,6 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateCampground = async (req, res) => {
     const {id} = req.params;
-    console.log(req.body);
     // ""..." split req body attribute to update
     const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
     const imgs = req.files.map(f => ({url: f.path, fileName: f.filename}));
